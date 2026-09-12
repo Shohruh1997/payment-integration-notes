@@ -1,14 +1,18 @@
-# Платёжные интеграции в Узбекистане: Payme, Click, Uzum
+<div align="center">
 
-Заметки по подключению трёх локальных платёжных провайдеров к сайтам и
-Telegram-ботам. Что у них общего, чем они различаются и где ломается чаще всего.
+# 💳 Платёжные интеграции в Узбекистане
 
-Написано по опыту продакшен-интеграций. Исходный код в приватных репозиториях,
-доступ по запросу.
+**Payme · Click · Uzum** — три разные интеграции за одним интерфейсом
+
+[![PHP](https://img.shields.io/badge/PHP-8.3-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
+![Провайдеров](https://img.shields.io/badge/провайдеров-3-6366f1?style=flat-square)
+![Идемпотентность](https://img.shields.io/badge/идемпотентность-обязательна-22c55e?style=flat-square)
+
+</div>
 
 ---
 
-## Главное заблуждение
+## 🎭 Главное заблуждение
 
 «Подключить оплату» звучит как одна задача. На деле это **три разные интеграции**:
 у каждого провайдера свой формат callback, своя схема подписи, свой набор
@@ -34,7 +38,7 @@ interface PaymentGateway
 
 ---
 
-## Жизненный цикл платежа
+## 🔄 Жизненный цикл платежа
 
 ```mermaid
 stateDiagram-v2
@@ -65,7 +69,7 @@ stateDiagram-v2
 
 ---
 
-## Идемпотентность: главное требование, а не деталь
+## 🔒 Идемпотентность: главное требование, а не деталь
 
 Провайдер повторит webhook, если не получил ответ вовремя. Сеть моргнула, сервер
 перезапустился, обработчик отработал 31 секунду вместо 30 — придёт ещё раз.
@@ -108,7 +112,7 @@ sequenceDiagram
 
 ---
 
-## Подпись проверяется до всего остального
+## 🛡️ Подпись проверяется до всего остального
 
 ```php
 public function handleWebhook(string $rawBody, array $headers): array
@@ -129,7 +133,7 @@ public function handleWebhook(string $rawBody, array $headers): array
 
 ---
 
-## Деньги — целые числа, всегда
+## 💵 Деньги — целые числа, всегда
 
 Суммы передаются и хранятся **в минимальных единицах** (тийинах), а не в сумах с
 дробью. `float` в денежном расчёте даёт копеечные расхождения, которые всплывают
@@ -140,7 +144,7 @@ public function handleWebhook(string $rawBody, array $headers): array
 
 ---
 
-## Что не автоматизируется и занимает больше времени, чем код
+## ⏳ Что не автоматизируется и занимает больше времени, чем код
 
 Готовая интеграция — не главная часть работы. Больше всего времени уходит на:
 
@@ -154,7 +158,7 @@ public function handleWebhook(string $rawBody, array $headers): array
 
 ---
 
-## Фискализация: оплата прошла — это ещё не всё
+## 🧾 Фискализация: оплата прошла — это ещё не всё
 
 Онлайн-оплата в Узбекистане требует фискального чека. Платёжная система может
 фискализировать его за вас, выступая **комиссионером**, но только если продавец
@@ -165,7 +169,7 @@ public function handleWebhook(string $rawBody, array $headers): array
 
 ---
 
-## Чек-лист перед запуском
+## ✅ Чек-лист перед запуском
 
 - [ ] Подпись проверяется до разбора тела запроса
 - [ ] `UNIQUE (provider, provider_tx_id)` в схеме
@@ -179,7 +183,7 @@ public function handleWebhook(string $rawBody, array $headers): array
 
 ---
 
-## Смежные заметки
+## 🔗 Смежные заметки
 
 - [db-schema-notes](https://github.com/Shohruh1997/db-schema-notes) — схемы БД, в том числе таблицы транзакций
 - [uz-fiscal-compliance-notes](https://github.com/Shohruh1997/uz-fiscal-compliance-notes) — ИКПУ, касса, ЭСФ
@@ -187,4 +191,13 @@ public function handleWebhook(string $rawBody, array $headers): array
 
 ---
 
-Шохрух Рузиев · backend-разработчик, Ташкент · [ecomdev.uz](https://ecomdev.uz)
+<div align="center">
+
+**Шохрух Рузиев** · backend-разработчик, Ташкент
+
+[![Сайт](https://img.shields.io/badge/ecomdev.uz-6366f1?style=for-the-badge&logo=googlechrome&logoColor=white)](https://ecomdev.uz)
+[![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/EcomDev_uz)
+
+Исходный код систем — в приватных репозиториях, доступ по запросу.
+
+</div>
