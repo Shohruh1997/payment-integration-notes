@@ -187,6 +187,7 @@ public function handleWebhook(string $rawBody, array $headers): array
 
 ## 🔗 Смежные заметки
 
+- [webhook-idempotency](https://github.com/Shohruh1997/webhook-idempotency-php) — рабочая PHP-реализация идемпотентности из этой заметки, MIT
 - [db-schema-notes](https://github.com/Shohruh1997/db-schema-notes) — схемы БД, в том числе таблицы транзакций
 - [uz-fiscal-compliance-notes](https://github.com/Shohruh1997/uz-fiscal-compliance-notes) — ИКПУ, касса, ЭСФ
 - [php-layered-architecture-notes](https://github.com/Shohruh1997/php-layered-architecture-notes) — где в слоях живёт шлюз
